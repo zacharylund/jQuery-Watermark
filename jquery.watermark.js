@@ -11,7 +11,6 @@
 */
 
 (function ($) {
-    var old_ie = $.browser.msie && $.browser.version < 8;
     var hard_left = 4;
     $.watermarker = function () { };
     $.extend($.watermarker, {
@@ -67,6 +66,8 @@
 
             watermark_container.css({
                 display: 'inline-block',
+                zoom: 1,
+                '*display': 'inline', // Support IE 6 and 7.
                 position: 'relative'
             });
 
@@ -75,13 +76,6 @@
 
             if ($elem.attr('data-percent-height') == 'true')
                 watermark_container.css('height', '100%');
-
-            if (old_ie) {
-                watermark_container.css({
-                    zoom: 1,
-                    display: 'inline'
-                });
-            }
 
             $elem.wrap(watermark_container).attr('data-jq-watermark', 'processed');
 
